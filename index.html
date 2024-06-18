@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personalized Budget Planner</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Your Personalized Budget Planner</h1>
+        <nav>
+            <button id="home-button"><i class="fas fa-home"></i> Home</button>
+            <button id="toggle-theme"><i class="fas fa-adjust"></i> Toggle Theme</button>
+            <button id="show-profile"><i class="fas fa-user"></i> Profile</button>
+            <button id="show-login-page"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <button id="show-app-page"><i class="fas fa-list-alt"></i> Budget Manager</button>
+            <button id="show-dashboard"><i class="fas fa-chart-line"></i> Insights</button>
+            <button id="show-bill-splitter"><i class="fas fa-receipt"></i> Bill Splitter</button>
+            <button id="show-chatbot"><i class="fas fa-comments"></i> Chatbot</button>
+            <button id="show-feedback"><i class="fas fa-comments"></i> Feedback</button>
+            <button id="logout-button" style="display:none;"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </nav>
+    </header>
+    <main>
+        <section id="home-page">
+            <div class="home-content">
+                <h2>Welcome to Your Personalized Budget Planner</h2>
+                <p>Manage your income and expenses efficiently with our advanced budgeting tools.</p>
+                <p class="theme-recommendation"><i class="fas fa-moon"></i> For the best user experience, turn on the dark theme!</p>
+                <button id="start-planning"><i class="fas fa-play"></i> Start Planning</button>
+            </div>
+            <div class="home-features">
+                <h3>Features</h3>
+                <ul>
+                    <li><i class="fas fa-chart-line"></i> Track your income and expenses</li>
+                    <li><i class="fas fa-bullseye"></i> Set and achieve financial goals</li>
+                    <li><i class="fas fa-receipt"></i> Split bills with friends and family</li>
+                    <li><i class="fas fa-comments"></i> Get financial advice from our chatbot</li>
+                    <li><i class="fas fa-file-invoice-dollar"></i> Scan and manage receipts</li>
+                </ul>
+            </div>
+            <div class="home-image">
+                <img src="image2.jpg" alt="Budget Planner" id="home-image">
+            </div>
+        </section>
+        <section id="login-page" style="display:none;">
+            <form id="login-form">
+                <h2>Login</h2>
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+                <p>Don't have an account? <a href="#" id="show-signup">Sign Up</a></p>
+            </form>
+        </section>
+        <section id="signup-page" style="display:none;">
+            <form id="signup-form">
+                <h2>Sign Up</h2>
+                <input type="email" id="signup-email" placeholder="Email" required>
+                <input type="password" id="signup-password" placeholder="Password" required>
+                <input type="text" id="signup-name" placeholder="Name" required>
+                <input type="date" id="signup-dob" placeholder="Date of Birth" required>
+                <input type="text" id="signup-age" placeholder="Age" required>
+                <label>
+                    <input type="checkbox" id="signup-earning"> Are you earning?
+                </label>
+                <button type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+        </section>
+        <section id="profile-page" style="display:none;">
+            <h2>User Profile</h2>
+            <form id="profile-form">
+                <input type="text" id="profile-name" placeholder="Name" required>
+                <input type="email" id="profile-email" placeholder="Email" required disabled>
+                <input type="file" id="profile-picture" accept="image/*">
+                <button type="submit"><i class="fas fa-save"></i> Update Profile</button>
+            </form>
+        </section>
+        <section id="app-page" style="display:none;">
+            <div class="balance">
+                <h2>Your Balance: ₹<span id="balance">0.00</span></h2>
+            </div>
+            <div class="income-expense">
+                <div>
+                    <h3>Income</h3>
+                    <p id="income">₹0.00</p>
+                </div>
+                <div>
+                    <h3>Expense</h3>
+                    <p id="expense">₹0.00</p>
+                </div>
+            </div>
+            <form id="transaction-form">
+                <input type="text" id="description" placeholder="Description" required>
+                <input type="number" id="amount" placeholder="Amount" required>
+                <input type="date" id="date" placeholder="Date" required>
+                <select id="type">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <label>
+                    <input type="checkbox" id="recurring">
+                    Recurring Transaction
+                </label>
+                <button type="submit"><i class="fas fa-plus"></i> Add Transaction</button>
+            </form>
+            <form id="goal-form">
+                <h3>Set Budget Goal</h3>
+                <input type="number" id="goal-amount" placeholder="Goal Amount" required>
+                <button type="submit"><i class="fas fa-bullseye"></i> Set Goal</button>
+            </form>
+            <form id="receipt-form">
+                <h3>Scan Receipt</h3>
+                <input type="file" id="receipt-upload" accept="image/*">
+                <button type="submit"><i class="fas fa-camera"></i> Scan Receipt</button>
+            </form>
+            <div class="columns">
+                <div class="column">
+                    <h3>Income</h3>
+                    <ul id="income-list"></ul>
+                </div>
+                <div class="column">
+                    <h3>Expenses</h3>
+                    <ul id="expense-list"></ul>
+                </div>
+            </div>
+        </section>
+        <section id="dashboard-page" style="display:none;">
+            <h2>Personalized Financial Insights</h2>
+            <canvas id="spending-trend-chart"></canvas>
+            <canvas id="budget-forecast-chart"></canvas>
+            <canvas id="financial-health-chart"></canvas>
+        </section>
+        <section id="bill-splitter-page" style="display:none;">
+            <h2>Bill Splitter</h2>
+            <form id="bill-splitter-form">
+                <input type="number" id="number-of-people" placeholder="Number of People" required>
+                <button type="submit"><i class="fas fa-users"></i> Set Participants</button>
+            </form>
+            <div id="participants"></div>
+            <div id="bill-splitter-result"></div>
+        </section>
+        <section id="chatbot-page" style="display:none;">
+            <h2>Financial Health Chatbot</h2>
+            <div id="chatbot-messages"></div>
+            <input type="text" id="chatbot-input" placeholder="Ask me a question...">
+            <button id="chatbot-send"><i class="fas fa-paper-plane"></i> Send</button>
+            <div id="faq-section">
+                <h3>Questions you can ask the chatbot:</h3>
+                <ul id="faq-list">
+                    <li>What is my balance?</li>
+                    <li>How much have I spent?</li>
+                    <li>How much have I earned?</li>
+                    <li>What is my budget goal?</li>
+                    <li>What are my recent transactions?</li>
+                    <li>How can I reduce my expenses?</li>
+                    <li>What is my income to expense ratio?</li>
+                    <li>What is a financial tip?</li>
+                    <li>What is a motivational quote?</li>
+                    <li>What is my highest expense?</li>
+                    <li>How can I save more money?</li>
+                </ul>
+            </div>
+        </section>
+        <section id="feedback-page" style="display:none;">
+            <h2>Feedback and Suggestions</h2>
+            <form id="feedback-form">
+                <textarea id="feedback-text" placeholder="Your feedback and suggestions" required></textarea>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Your Personalized Budget Planner. All rights reserved.</p>
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+</html>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
